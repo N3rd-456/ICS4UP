@@ -1,0 +1,407 @@
+/**
+ * Purpose: Main class that kickstarts the whole program and simulates a TEJ3M quiz by printing questions, checking answers and adjusting scores.
+ * Author: Jake Bastin
+ * Date: Monday January 13, 2020
+ */
+
+// This line of code imports the scanner for user keyboard input.
+import java.util.Scanner;
+
+public class QuizGame 
+{
+
+	// Initialize and declare the required fields needed to track user input and the user score.
+	private static int random = (int) (Math.random() * 20);
+	private static int answersWrong = 0;
+	private static int answersRight = 0;
+	private static Scanner scan = new Scanner(System.in);
+
+	// Main method that kickstarts the entire program and prints out the introduction and course questions.
+	public static void main(String[] args) 
+	{
+
+		// These lines of code print out what the quiz is about.
+		System.out.println("Hmm, you must be taking TEJ3M, Gr 11 Computer Engineering. In that case, get ready to start the TEJ3M Final Exam Review Quiz!!");
+		System.out.println("");
+		System.out.println("");
+
+		// This code block prints out the instructions as well as scores (win or lose) scenarios.
+		System.out.println("Instructions:");
+		System.out.println("");
+		System.out.println("This quiz consists of 10 multiple choice and true/false questions.");
+		System.out.println("Read carefully and answer the questions, typing the corresponding letters given (a, b, c, d) using ONLY lower case.");
+		System.out.println("Get 5 or more questions correct to pass and win. If you don't... YOU FAIL and lose! :(");
+		System.out.println("");
+
+		// Run the methods within different classes that print out the 10 random questions and tracks the score.
+		QuizQuestions.courseQuestions();
+		QuizScore.quizPoints();
+
+	}
+
+	// Makes the scanner visible to other classes.
+	public static Scanner useScan()
+	{
+		return scan;
+	}
+
+	// Retrieves the scanner to be used for user input in other classes.
+	public static void scanRetrieve(Scanner scan)
+	{
+		QuizGame.scan = scan;
+	}
+
+	// Returns the random field that picks a random question to be used in another class (QuizQuestions).
+	public static int questionRandom()
+	{
+		return random;
+	}
+
+	// Runs random when called upon and picks the randomized question but used in another class.
+	public static void randomize(int random)
+	{
+		QuizGame.random = random;
+	}
+
+	// Retrieves the right answer private field that keeps the number of correct answers to be used in other classes.
+	public static int correctRetrieve()
+	{
+		return QuizGame.answersRight;
+	}
+
+	// Sets the private int with the number of right answers to a public function to be used in another class.
+	public static void setRightAnswer(int correctAnswer)
+	{
+		QuizGame.answersRight = correctAnswer;
+	}
+
+	// Retrieves the wrong answer private field that keeps track of the number of incorrect answers to be used in other classes.
+	public static int incorrectRetrieve()
+	{
+		return answersWrong;
+	}
+
+	// Sets the private int field with the number of wrong answers to a public function to be used in another class.
+	public static void setWrongAnswer(int answersWrong)
+	{
+		QuizGame.answersWrong = answersWrong;
+	}
+
+}
+
+
+/**
+ * Purpose: This class prints out an array of 20 course questions and check whether they have already been used.
+ * Author: Jake Bastin
+ * Date: Thursday January 9, 2020
+ */
+
+public class QuizQuestions extends QuizGame
+{
+
+	public static void courseQuestions()
+	{
+
+	  // Creates a string array that contains the 20 course questions and their answer options.
+	  String[] questions = 
+		  {
+		     "What is Ohm's Law?"
+		 	  + "\na) q = NE"	
+		 	  + "\nb) V = IR" 
+		 	  + "\nc) F = MA"
+		 	  + "\nd) V = q/C",
+		 	
+		 	  "What does ALU stand for?"
+		 	  + "\na) Arithmetic Logic Unit" 
+		 	  + "\nb) Ampere Logic Unit"
+		 	  + "\nc) Arduino Logic Unit"
+		 	  + "\nd) Arithmetic Laptop Unicode",
+		 	
+		 	  "What is the truth table for an XNOR Logic Gate?"
+		 	  + "\na) 0001"
+		 	  + "\nb) 1100"
+		 	  + "\nc) 1001" 
+		 	  + "\nd) 0110",
+		 	
+		 	  "HTTP stands for “HyperText Transfer Protocol"
+		 	  + "\na) True" 
+		 	  + "\nb) False",
+		 	
+		 	  "There are billions of this component found within electronics. What is it?"
+		 	  + "\na) Resistors"
+		 	  + "\nb) Capacitors"
+		 	  + "\nc) Transistors" 
+		 	  + "\nd) Inductors",
+		 	
+		 	  "There are 4 logic gates in total."
+		 	  + "\na) False" 
+		 	  + "\nb) True",
+		 	
+		 	  "What does the variable \"C\" in the equation Ct = (C1^-1 + C2^-1...)^-1 denote?"
+		 	  + "\na) Conductance"
+		 	  + "\nb) Electric Charge"
+		 	  + "\nc) Capacitance" 
+		 	  + "\nd) Current",
+		 	
+		 	  "The potentiometer is a variable resistor that actively alters the amount of resistance in a circuit."
+		 	  + "\na) False"
+		 	  + "\nb) True", 
+		 	
+		 	  "The use of computer technology has and never will negatively impact others."
+		 	  + "\na) True"
+		 	  + "\nb) False", 
+		 	  
+		 	  "What does PWM stand for?"
+		 	  + "\na) Power Wide Modulation"
+		 	  + "\nb) Pizza Wild Man"
+		 	  + "\nc) Pulse Width Modulation" 
+		 	  + "\nd) Pulse Width Modulator",
+		 	  
+		 	  "The Arduino is a microcontroller."
+		 	  + "\na) True"
+		 	  + "\nb) False", 
+		 	  
+		 	  "What are the 2 type of input/output pins on the Arduino microcontroller platform?"
+		 	  + "\na) Digital, Power"
+		 	  + "\nb) Power, Analog"
+		 	  + "\nc) PWM, Power"
+		 	  + "\nd) Digital, Analog", 
+		 	  
+		 	  "The Arduino is not open source hardware."
+		 	  + "\na) True"
+		 	  + "\nb) False", 
+		 	  
+		 	  "There are 2 ways (ports) to power the Arduino."
+		 	  + "\na) False"
+		 	  + "\nb) True", 
+		 	  
+		 	  "WAN stands for World Area Network."
+		 	  + "\na) False" 
+		 	  + "\nb) True",
+		 	  
+		 	  "What type of hacker is defined to be working towards a malicious goal?"
+		 	  + "\na) White Hat Hacker"
+		 	  + "\nb) Black Hat Hacker" 
+		 	  + "\nc) Grey Hat Hacker"
+		 	  + "\nd) All of the above",
+		 	  
+		 	  "The Arduino's on board LED is internally connected to digital pin ____"
+		 	  + "\na) 12"
+		 	  + "\nb) 13" 
+		 	  + "\nc) 1"
+		 	  + "\nd) 2",
+		 	  
+		 	  "What programming language is the Arduino IDE based off of."
+		 	  + "\na) Java"
+		 	  + "\nb) C/C++" 
+		 	  + "\nc) Python"
+		 	  + "\nd) Ruby",
+		 	  
+		 	  "CMOS stands for Complimentary Metal-Oxide Semiconductor"
+		 	  + "\na) True" 
+		 	  + "\nb) False",
+		 	  
+		 	  "What is the prototyping platform for electronic circuit development?"
+		 	  + "\na) Breadboard" 
+		 	  + "\nb) Arduino"
+		 	  + "\nc) Printed Circuit Boards (PCB)"
+		 	  + "\nd) None of the above"
+		  };
+	
+	  // This string stores the users answer response and creates a boolean array that with the questions arrays length.
+	  String userResponse;
+	  boolean[] questionUsed = new boolean[questions.length];
+	  int count = 0;
+
+	  // This while loop prints 10 random questions out of the possible 20 questions.
+	  while(count < 10)
+	  {		
+		  count = count + 1;
+		  randomize((int) (Math.random() * 20));
+
+		  // Checks if a question has been used and selects another question if it has been used already.
+		  for(; questionUsed[questionRandom()] == true ;)
+		  {
+			  randomize((int) (Math.random() * 20));
+		  }
+
+		  // Prints out a randomly selected question and opens up the scanners user input.
+		  System.out.println("");
+		  System.out.print(questions[questionRandom()]);
+		  userResponse = useScan().nextLine();
+
+		  // Checks if the users response matches the correct answer and sets the question to have already been used.
+		  QuizAnswers.quizAnswerCheck(userResponse);
+		  System.out.println("");
+		  questionUsed[questionRandom()] = true;
+	  }
+
+	}
+
+}
+
+
+/**
+ * Purpose: This class includes the char array that contains all the MC answers checks if the user response matches it.
+ * Author: Jake Bastin
+ * Date: Friday January 10, 2020
+ */
+
+public class QuizAnswers extends QuizGame
+{
+
+	public static void quizAnswerCheck(String userResponse)
+	{
+		
+		// This char array contains all the multiple choice answers in order.
+		char[] answers = 
+			{
+				'b',
+				'a',
+				'c',
+				'a',
+				'c',
+				'a',
+				'c',
+				'b',
+				'b',
+				'c',
+				'b',
+				'd',
+				'b',
+				'b',
+				'a',
+				'b',
+				'b',
+				'b',
+				'a',
+				'a',		
+			};
+		
+		// Checks if user input matches the correct answer and adjusts the number of correct answers accordingly and prints correct.
+		if(userResponse.charAt(0) == (answers[questionRandom()]))
+		{
+			System.out.println("");
+			System.out.println("Correct!");
+			setRightAnswer(correctRetrieve() + 1);
+		}
+		
+		// Increments the number of incorrect answers and lets the user know if they got it wrong if input doesn't match answer.
+		else 
+		{
+			System.out.println("");
+			System.out.println("Wrong!");
+			setWrongAnswer(incorrectRetrieve() + 1);
+		}		
+	
+	}
+	
+}
+
+
+/**
+ * Purpose: Checks how many answers have been answered correctly and prints out a personalized comment, score and whether the user has won.
+ * Author: Jake Bastin
+ * Date: Tuesday January 14, 2020
+ */
+
+public class QuizScore extends QuizGame
+{
+
+	public static void quizPoints()
+	{
+
+		// Closes the scanner from receiving user input and lets the user know that the quiz is over.
+		useScan().close();
+		System.out.println("");
+		System.out.println("-End of Quiz!-");
+
+		// Prints out the score, a personalized comment as well as whether or not the user won depending on the score.
+		switch(QuizAnswers.correctRetrieve())
+		{
+
+		// Cases 10 to 5 run if the user got 5 or more correct answers, lets them know that they won and prints their score.
+		case 10:
+			System.out.println("Are you a reincarnation of Maxwell!? YOU ACED IT!!!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		case 9: 
+			System.out.println("Excellent studying out there! You strive for perfection (or close to it)!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		case 8:
+			System.out.println("Great job out there! You achieved an \"A\" score and proved that you know a good portion of the content!");			
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		case 7:
+			System.out.println("You did decently. Your studying could improve slightly but you scored a sufficient amount of questions correctly!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		case 6:
+			System.out.println("Not bad! You did alright but your study habits could be improved!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		case 5:
+			System.out.println("You barely passed! You should REALLY learn how to study better! You only retained about half the information on this quiz!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU WIN! :)");
+			break;
+
+		// Cases 4 to 1 runs if the user got between 1 to 4 questions right, tells the user that they lost and their score.
+		case 4: 
+			System.out.println("You failed! If you want to pass this course, you should probably try harder");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU LOSE! :(");
+			break;
+
+		case 3: 
+			System.out.println("You failed! At this point, you should get a tutor to help you study for this course."); 
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU LOSE! :(");
+			break;
+
+		case 2:
+			System.out.println("You failed! At this point, you should get a tutor to help you study for this course."); 
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU LOSE! :(");
+			break;
+
+		case 1:
+			System.out.println("You failed! At this point, you should get a tutor to help you study for this course."); 
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU LOSE! :(");
+			break;
+
+		// Case 0 runs if the user didn't get any questions right, prints their score and that they lost.
+		case 0:
+			System.out.println("You have A LOT of work to do... You are very far from success but you can do it!!!");
+			System.out.println("Score: You got " + QuizGame.correctRetrieve() + " right and " + QuizGame.incorrectRetrieve() + " wrong.");
+			System.out.println("");
+			System.out.println("YOU LOSE! :(");
+			break;
+
+		}
+		
+	}
+
+}
